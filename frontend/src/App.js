@@ -19,10 +19,10 @@ function App() {
 
   return (
     <>
-      <div className="container d-flex justify-content-center align-items-center">
+      <div className="container-fluied d-flex justify-content-center align-items-center">
         <div w-100>
           <h2 className="text-center mb-4">GitHub Repository Events</h2>
-            <table className='table'>
+            <table class="table">
               <tr>
                   <ul>
                   {events.map(event => (

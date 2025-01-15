@@ -7,11 +7,11 @@ webhook = Blueprint('Webhook', __name__, url_prefix='/webhook')
 db = get_database()
 actions_collection = db["gitaction"]
 
-@webhook.route('/receiver', methods=["POST"])
+@webhook.route('/receiver', methods=["POST"]) 
 def receiver():
     payload = request.json
     # print('message',payload)
-    event_type = request.headers.get("X-GitHub-Event")
+    event_type = request.headers.get("X-GitHub-Event")  
     request_id = str(uuid.uuid4())
     author = payload.get("pusher", {}).get("name") if event_type == "push" else payload.get("sender", {}).get("login")
     timestamp = datetime.utcnow().strftime("%d %B %Y - %I:%M %p UTC")
@@ -33,11 +33,6 @@ def receiver():
             from_branch = payload["pull_request"]["head"]["ref"]
             to_branch = payload["pull_request"]["base"]["ref"]
             action = "PULL_REQUEST"
-
-    # elif event_type == "merge":
-    #     from_branch = payload.get("merge_branch_from")
-    #     to_branch = payload.get("merge_branch_to")
-    #     action = "MERGE"
 
     event_data = {
         "request_id": request_id,
